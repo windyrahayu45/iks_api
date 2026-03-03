@@ -2,11 +2,18 @@ import joblib
 import numpy as np
 from pathlib import Path
 
-MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "iks_model_v1.pkl"
+_model = None
 
-model = joblib.load(MODEL_PATH)
+def get_model():
+    global _model
+    if _model is None:
+        model_path = Path(__file__).resolve().parent.parent / "models" / "iks_model_v1.pkl"
+        _model = joblib.load(model_path)
+    return _model
 
 def predict_iks(data):
+    model = get_model()
+
     features = np.array([[
         data.economic_score,
         data.education_numeric,
