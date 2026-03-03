@@ -30,3 +30,10 @@ app.include_router(
     prefix="/anomaly",
     tags=["Validasi Kelayakan"]
 )
+
+@app.get("/")
+def root():
+    return {"status": "DTSEN ML Service Running"}
+
+# ⬇⬇⬇ WAJIB untuk Vercel
+handler = app
