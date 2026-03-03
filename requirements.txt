@@ -3,3 +3,4 @@ uvicorn
 pydantic
 joblib
 scikit-learn
+numpy
