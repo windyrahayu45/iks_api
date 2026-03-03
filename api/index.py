@@ -49,6 +49,16 @@ app.include_router(
     prefix="/iks"
 )
 
+
+
 @app.get("/")
 def root():
     return {"status": "ROOT WORKING"}
+
+from pathlib import Path
+
+def get_model():
+    model_path = Path(__file__).resolve().parent.parent / "models" / "iks_model_v1.pkl"
+    print("MODEL PATH:", model_path)
+    print("FILE EXISTS:", model_path.exists())
+    return joblib.load(model_path)
