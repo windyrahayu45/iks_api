@@ -35,9 +35,19 @@
 # def root():
 #     return {"status": "DTSEN ML Service Running"}
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import FastAPI
+from routers import iks
 
 app = FastAPI()
+
+app.include_router(
+    iks.router,
+    prefix="/iks"
+)
 
 @app.get("/")
 def root():
