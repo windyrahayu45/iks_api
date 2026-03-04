@@ -28,15 +28,16 @@ import joblib
 import numpy as np
 import os
 
+from pathlib import Path
+
 _model = None
 
 def get_model():
     global _model
     if _model is None:
-        base_dir = os.getcwd()  # ini penting
-        model_path = os.path.join(base_dir, "models", "iks_model_v1.pkl")
+        model_path = Path(__file__).resolve().parent.parent / "models" / "iks_model_v1.pkl"
         print("MODEL PATH:", model_path)
-        print("FILE EXISTS:", os.path.exists(model_path))
+        print("FILE EXISTS:", model_path.exists())
         _model = joblib.load(model_path)
     return _model
 
