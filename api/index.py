@@ -37,6 +37,8 @@
 
 import sys
 import os
+import traceback
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
@@ -52,3 +54,12 @@ app.include_router(
 @app.get("/")
 def root():
     return {"status": "ROOT WORKING"}
+
+
+# 👇 Tambahkan ini untuk debug error global
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    return {
+        "error": str(exc),
+        "trace": traceback.format_exc()
+    }
