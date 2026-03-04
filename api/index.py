@@ -51,6 +51,11 @@ app.include_router(
     prefix="/iks"
 )
 
+def handler(request, context):
+    from mangum import Mangum
+    asgi_handler = Mangum(app)
+    return asgi_handler(request, context)
+
 @app.get("/")
 def root():
     return {"status": "ROOT WORKING"}
@@ -68,3 +73,4 @@ async def global_exception_handler(request, exc):
             "trace": traceback.format_exc()
         },
     )
+
