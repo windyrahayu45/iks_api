@@ -14,10 +14,17 @@
 
 from fastapi import APIRouter
 from services.iks_service import get_model
+import numpy as np
 
 router = APIRouter()
 
 @router.get("/")
 def test_iks():
     model = get_model()
-    return {"status": "model loaded"}
+
+    # dummy features sesuai jumlah kolom model
+    features = np.array([[0, 0, 0, 0, 0]])
+
+    result = model.predict(features)
+
+    return {"result": result.tolist()}
