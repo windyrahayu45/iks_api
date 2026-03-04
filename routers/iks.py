@@ -13,12 +13,11 @@
 #     }
 
 from fastapi import APIRouter
-from services import iks_service
+from services.iks_service import get_model
 
 router = APIRouter()
 
-print("IKS ROUTER IMPORTED")
-
 @router.get("/")
 def test_iks():
-    return {"iks": "router working"}
+    model = get_model()
+    return {"status": "model loaded"}
